@@ -1,0 +1,21 @@
+#!/bin/bash
+# Riyad Shauk. 2013-2014. Mod this up; share it. It's quite basic as is.
+#  Consider adding forking in, to keep process in background...
+#   Conceptually, this sounds simple, but BASH doesn't seem to support
+#   the same fork() functionality as in C. Maybe try in C..?
+echo -n "Enter number of hours you wish to sleep (to two decimal places): "
+read
+echo -n "You wish to sleep "
+echo -n $(echo "$REPLY * 3600 " | bc)
+echo " seconds."
+
+secondsTillAlarm=$(echo "$REPLY * 3600" | bc)
+
+echo -n "Your wakeup alarm is now set to wake you up in "
+echo -n $secondsTillAlarm
+echo " seconds. Enjoy your sleep!"
+
+sleep $secondsTillAlarm
+osascript -e 'set volume output volume 100'
+# I make use of a Google Chrome plugin (Auto Replay for YouTube™) to keep alarm on autoreplay.
+open "https://www.youtube.com/watch?v=Rg2qrYgB3tQ#start=0:00;end=0:28;autoreplay=true"
